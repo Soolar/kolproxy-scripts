@@ -1,3 +1,13 @@
+------------------------------------------------------------------
+-- This script will maintain any castable buffs you have active --
+-- that you are capable of extending yourself, when you have a  --
+-- reasonable amount of mana. It will only extend buffs that    --
+-- you already have active, so it won't have weird issues with  --
+-- Accordion Thief buffs, and you can stop maintaining a buff   --
+-- by shrugging it off.                                         --
+------------------------------------------------------------------
+
+
 -- If you have less than this percentage of your max mp left, no more buffs will be autocast
 local mppercentcutoff = 1 - 0.11
 -- Won't bother extending buffs to last longer than this
@@ -87,6 +97,9 @@ local buffs = {
   -- Challenge path specific classes coming eventually, probably.
 }
 
+-- Most buffs are created by a skill with the same name,
+-- but sometimes the skills are different instead, just
+-- to inconvenience you! Or something.
 local buffskillnames = {
   ["Blubbered Up"] = "Blubber Up",
   ["Empathy"] = "Empathy of the Newt",
