@@ -19,166 +19,150 @@ local maxloops = 11
 --       UNLESS THEY INTEND TO MODIFY CORE FUNCTIONALITY        --
 ------------------------------------------------------------------
 
+local function buff(effectname, mpcost, skillname)
+  skillname = skillname or effectname
+  return { effectname = effectname, mpcost = mpcost, skillname = skillname }
+end
+
 local buffs = {
   ---[===[ STANDARD CLASSES
   ---[=[ Seal Clubber
   -- +2 Muscle
-  "Seal Clubbing Frenzy",
+  buff("Seal Clubbing Frenzy", 1),
   -- +5 Moxie
-  "Blubbered Up",
+  buff("Blubbered Up", 7, "Blubber Up"),
   -- +10 Weapon Damage. Facial expression.
-  "Scowl of the Auk",
+  buff("Scowl of the Auk", 10),
   -- +10% Muscle, +10 Weapon Damage
-  "Rage of the Reindeer",
+  buff("Rage of the Reindeer", 10),
   -- Increases combat frequency.
-  "Musk of the Moose",
+  buff("Musk of the Moose", 10),
   -- +10 Monster Level
-  "Pride of the Puffin",
+  buff("Pride of the Puffin", 30),
   -- +10 Spooky Damage. Facial expression.
-  "Snarl of the Timberwolf",
+  buff("Snarl of the Timberwolf", 10),
   -- +5xLevel HP, up to +55. Crimbo '09 skill.
-  "A Few Extra Pounds",
+  buff("A Few Extra Pounds", 10, "Holiday Weight Gain"),
   --]=]
 
   ---[=[ Turtle Tamer
   -- +1 Muscle, +3 HP
-  "Patience of the Tortoise",
+  buff("Patience of the Tortoise", 1),
   -- 10 Damage Reduction. Facial expression.
-  "Stiff Upper Lip",
+  buff("Stiff Upper Lip", 10),
   -- +80 Damage Absorption
-  "Ghostly Shell",
+  buff("Ghostly Shell", 6),
   -- +8 Weapon Damage
-  "Tenacity of the Snapper",
+  buff("Tenacity of the Snapper", 8),
   -- +5 Familiar Weight
-  "Empathy",
+  buff("Empathy", 15, "Empathy of the Newt"),
   -- Damages attacking Monsters
-  "Spiky Shell",
+  buff("Spiky Shell", 8),
   -- +30 HP
-  "Reptilian Fortitude",
+  buff("Reptilian Fortitude", 10),
   -- +80 Damage Absorption, Slight resistance to all elements (+1)
-  "Astral Shell",
+  buff("Astral Shell", 10),
   -- Your melee attacks restore some HP
-  "Boon of the War Snapper",
+  buff("Boon of the War Snapper", 30, "Spirit Boon"),
   -- +20 Weapon Damage, Your melee attacks deal Spooky Damage
-  "Boon of She-Who-Was",
+  buff("Boon of She-Who-Was", 30, "Spirit Boon"),
   -- Your melee attacks restore some MP
-  "Boon of the Storm Tortoise",
+  buff("Boon of the Storm Tortoise", 30, "Spirit Boon"),
   -- +1 Muscle Substat per fight. Facial expression.
-  "Patient Smile",
+  buff("Patient Smile", 10),
   -- Familiar will act more often in combat. Crimbo '09 skill.
-  "Jingle Jangle Jingle",
+  buff("Jingle Jangle Jingle", 5),
   -- +1 Familiar Experience per combat. Travelling Trader skill.
-  "Curiosity of Br'er Tarrypin",
+  buff("Curiosity of Br'er Tarrypin", 10),
   --]=]
 
   ---[=[ Pastamancer
   -- +2 Mysticality
-  "Pasta Oneness",
+  buff("Pasta Oneness", 1, "Manicotti Meditation"),
   -- +10 Spell Damage. Facial expression.
-  "Arched Eyebrow of the Archmage",
+  buff("Arched Eyebrow of the Archmage", 10),
   -- +40% Combat Initiative
-  "Springy Fusilli",
+  buff("Springy Fusilli", 10),
   -- 30% Reduced physical damage taken (10% for non-Pastamancers)
-  "Shield of the Pastalord",
+  buff("Shield of the Pastalord", 20),
   -- +5 Familiar Weight
-  "Leash of Linguini",
+  buff("Leash of Linguini", 12),
   -- +10% Spell Critical Chance. Facial expression.
-  "Wizard Squint",
+  buff("Wizard Squint", 10),
   --]=]
 
   ---[=[ Sauceror
   -- +1 Mysticality, +3 HP
-  "Saucemastery",
+  buff("Saucemastery", 1, "Sauce Contemplation"),
   -- +10 Cold Damage, +10 Damage with Cold spells. Facial expression.
-  "Icy Glare",
+  buff("Icy Glare", 10),
   -- So-So Resistance to all elements (+2)
-  "Elemental Saucesphere",
+  buff("Elemental Saucesphere", 10),
   -- 3 Damage Reduction, Lightly damages attacking Monsters
-  "Jalapeño Saucesphere",
+  buff("Jalapeño Saucesphere", 5),
   -- Regenerate 4-5 HP per Adventure
-  "Antibiotic Saucesphere",
+  buff("Antibiotic Saucesphere", 15),
   -- +1 Mysticality Substat per fight. Facial expression.
-  "Wry Smile",
+  buff("Wry Smile", 10),
   -- +15% Spell Critical Chance (+5% for non-Sauceror)
-  "Sauce Monocle",
+  buff("Sauce Monocle", 20),
   --]=]
 
   ---[=[ Disco Bandit
   -- +2 Moxie
-  "Disco State of Mind",
+  buff("Disco State of Mind", 1, "Disco Aerobics"),
   -- +10 Moxie. Facial expression.
-  "Disco Smirk",
+  buff("Disco Smirk", 10),
   -- +10% Moxie, +10 Ranged Damage
-  "Disco Fever",
+  buff("Disco Fever", 10),
   -- Decreases combat frequency.
-  "Smooth Movements",
+  buff("Smooth Movements", 10, "Smooth Movement"),
   -- +10% Meat from Monsters. Facial expression.
-  "Disco Leer",
+  buff("Disco Leer", 10),
   --]=]
 
   ---[=[ Accordion Thief
   -- +1 Moxie, +3 HP
-  "Mariachi Mood",
+  buff("Mariachi Mood", 1, "Moxie of the Mariachi"),
   -- +10 Moxie. Song.
-  "The Moxious Madrigal",
+  buff("The Moxious Madrigal", 2),
   -- +10 Mysticality, +20 MP. Song.
-  "Magical Mojomuscular Melody",
+  buff("Magical Mojomuscular Melody", 3, "The Magical Mojomuscular Melody"),
   -- +20% Combat Initiative. Song.
-  "Cletus's Canticle of Celerity",
+  buff("Cletus's Canticle of Celerity", 4),
   -- +10 Muscle, +20 HP. Song.
-  "Power Ballad of the Arrowsmith",
+  buff("Power Ballad of the Arrowsmith", 5, "The Power Ballad of the Arrowsmith"),
   -- +50% Meat from Monsters. Song.
-  "Polka of Plenty",
+  buff("Polka of Plenty", 7, "The Polka of Plenty"),
   -- +12 Weapon and Spell Damage. Song.
-  "Jackasses' Symphony of Destruction",
+  buff("Jackasses' Symphony of Destruction", 9),
   -- +20% Items from Monsters. Song.
-  "Fat Leon's Phat Loot Lyric",
+  buff("Fat Leon's Phat Loot Lyric", 11),
   -- floor(level^1.2) Damage Reduction. Song.
-  "Brawnee's Anthem of Absorption",
+  buff("Brawnee's Anthem of Absorption", 13),
   -- +20% Combat Initiative. Facial expression.
-  "Suspicious Gaze",
+  buff("Suspicious Gaze", 10),
   -- Delevels and Damages attacking Monsters. Song.
-  "Psalm of Pointiness",
+  buff("Psalm of Pointiness", 15, "The Psalm of Pointiness"),
   -- +10% to All Attributes. Song.
-  "Stevedave's Shanty of Superiority",
+  buff("Stevedave's Shanty of Superiority", 30),
   -- +1 of each Substat per fight. Song.
-  "Aloysius' Antiphon of Aptitude",
+  buff("Aloysius' Antiphon of Aptitude", 40),
   -- Decreases combat frequency. Song.
-  "The Sonata of Sneakiness",
+  buff("The Sonata of Sneakiness", 20),
   -- Increases combat frequency. Song.
-  "Carlweather's Cantata of Confrontation",
+  buff("Carlweather's Cantata of Confrontation", 20),
   -- +1 Moxie Substat per fight. Facial expression.
-  "Knowing Smile",
+  buff("Knowing Smile", 10),
   -- +2*level ML. Song.
-  "Ur-Kel's Aria of Annoyance",
+  buff("Ur-Kel's Aria of Annoyance", 30),
   -- +12 Spooky Damage, +12 Damage with Spooky spells. Song.
-  "Dirge of Dreadfulness",
+  buff("Dirge of Dreadfulness", 9),
   -- Regenerate 5-10 HP per Adventure. Crimbo '09 skill. Song.
-  "Cringle's Curative Carol",
+  buff("Cringle's Curative Carol", 5),
   --]=]
   --]===]
   -- Challenge path specific classes coming eventually, probably.
-}
-
--- Most buffs are created by a skill with the same name,
--- but sometimes the skills are different instead, just
--- to inconvenience you! Or something.
-local buffskillnames = {
-  ["Blubbered Up"] = "Blubber Up",
-  ["Empathy"] = "Empathy of the Newt",
-  ["Boon of the War Snapper"] = "Spirit Boon",
-  ["Boon of She-Who-Was"] = "Spirit Boon",
-  ["Boon of the Storm Tortoise"] = "Spirit Boon",
-  ["Jingle Jangle Jingle"] = "Jingle Bells",
-  ["Pasta Oneness"] = "Manicotti Meditation",
-  ["Saucemastery"] = "Sauce Contemplation",
-  ["Disco State of Mind"] = "Disco Aerobics",
-  ["Smooth Movements"] = "Smooth Movement",
-  ["Mariachi Mood"] = "Moxie of the Mariachi",
-  ["Magical Mojomuscular Melody"] = "The Magical Mojomuscular Melody",
-  ["Power Ballad of the Arrowsmith"] = "The Power Ballad of the Arrowsmith",
-  ["Polka of Plenty"] = "The Polka of Plenty",
-  ["Psalm of Pointiness"] = "The Psalm of Pointiness",
 }
 
 local function buffmaintenanceautomator()
@@ -192,9 +176,8 @@ local function buffmaintenanceautomator()
     local leastturnsleft = maxturns
     local bufftocast
     for i,v in ipairs(buffs) do
-      local skillname = buffskillnames[v] or v
-      if have_skill(skillname) then
-        local turnsleft = buffturns(v)
+      if have_skill(v.skillname) then
+        local turnsleft = buffturns(v.effectname)
         if turnsleft > 0 and turnsleft < leastturnsleft then
           leastturnsleft = turnsleft
           bufftocast = skillname
