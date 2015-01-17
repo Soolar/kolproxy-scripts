@@ -23,75 +23,139 @@ local maxloops = 11
 local buffs = {
   ---[===[ STANDARD CLASSES
   ---[=[ Seal Clubber
-  "Seal Clubbing Frenzy",                   -- +2 Muscle
-  "Blubbered Up",                           -- +5 Moxie
-  "Scowl of the Auk",                       -- +10 Weapon Damage. Facial expression.
-  "Rage of the Reindeer",                   -- +10% Muscle, +10 Weapon Damage
-  "Musk of the Moose",                      -- Increases combat frequency.
-  "Pride of the Puffin",                    -- +10 Monster Level
-  "Snarl of the Timberwolf",                -- +10 Spooky Damage. Facial expression.
-  "A Few Extra Pounds",                     -- +5xLevel HP, up to +55. Crimbo '09 skill.
+  -- +2 Muscle
+  "Seal Clubbing Frenzy",
+  -- +5 Moxie
+  "Blubbered Up",
+  -- +10 Weapon Damage. Facial expression.
+  "Scowl of the Auk",
+  -- +10% Muscle, +10 Weapon Damage
+  "Rage of the Reindeer",
+  -- Increases combat frequency.
+  "Musk of the Moose",
+  -- +10 Monster Level
+  "Pride of the Puffin",
+  -- +10 Spooky Damage. Facial expression.
+  "Snarl of the Timberwolf",
+  -- +5xLevel HP, up to +55. Crimbo '09 skill.
+  "A Few Extra Pounds",
   --]=]
+
   ---[=[ Turtle Tamer
-  "Patience of the Tortoise",               -- +1 Muscle, +3 HP
-  "Stiff Upper Lip",                        -- 10 Damage Reduction. Facial expression.
-  "Ghostly Shell",                          -- +80 Damage Absorption
-  "Tenacity of the Snapper",                -- +8 Weapon Damage
-  "Empathy",                                -- +5 Familiar Weight
-  "Spiky Shell",                            -- Damages attacking Monsters
-  "Reptilian Fortitude",                    -- +30 HP
-  "Astral Shell",                           -- +80 Damage Absorption, Slight resistance to all elements (+1)
-  "Boon of the War Snapper",                -- Your melee attacks restore some HP
-  "Boon of She-Who-Was",                    -- +20 Weapon Damage, Your melee attacks deal Spooky Damage
-  "Boon of the Storm Tortoise",             -- Your melee attacks restore some MP
-  "Patient Smile",                          -- +1 Muscle Substat per fight. Facial expression.
-  "Jingle Jangle Jingle",                   -- Familiar will act more often in combat. Crimbo '09 skill.
-  "Curiosity of Br'er Tarrypin",            -- +1 Familiar Experience per combat. Travelling Trader skill.
+  -- +1 Muscle, +3 HP
+  "Patience of the Tortoise",
+  -- 10 Damage Reduction. Facial expression.
+  "Stiff Upper Lip",
+  -- +80 Damage Absorption
+  "Ghostly Shell",
+  -- +8 Weapon Damage
+  "Tenacity of the Snapper",
+  -- +5 Familiar Weight
+  "Empathy",
+  -- Damages attacking Monsters
+  "Spiky Shell",
+  -- +30 HP
+  "Reptilian Fortitude",
+  -- +80 Damage Absorption, Slight resistance to all elements (+1)
+  "Astral Shell",
+  -- Your melee attacks restore some HP
+  "Boon of the War Snapper",
+  -- +20 Weapon Damage, Your melee attacks deal Spooky Damage
+  "Boon of She-Who-Was",
+  -- Your melee attacks restore some MP
+  "Boon of the Storm Tortoise",
+  -- +1 Muscle Substat per fight. Facial expression.
+  "Patient Smile",
+  -- Familiar will act more often in combat. Crimbo '09 skill.
+  "Jingle Jangle Jingle",
+  -- +1 Familiar Experience per combat. Travelling Trader skill.
+  "Curiosity of Br'er Tarrypin",
   --]=]
+
   ---[=[ Pastamancer
-  "Pasta Oneness",                          -- +2 Mysticality
-  "Arched Eyebrow of the Archmage",         -- +10 Spell Damage. Facial expression.
-  "Springy Fusilli",                        -- +40% Combat Initiative
-  "Shield of the Pastalord",                -- 30% Reduced physical damage taken (10% for non-Pastamancers)
-  "Leash of Linguini",                      -- +5 Familiar Weight
-  "Wizard Squint",                          -- +10% Spell Critical Chance. Facial expression.
+  -- +2 Mysticality
+  "Pasta Oneness",
+  -- +10 Spell Damage. Facial expression.
+  "Arched Eyebrow of the Archmage",
+  -- +40% Combat Initiative
+  "Springy Fusilli",
+  -- 30% Reduced physical damage taken (10% for non-Pastamancers)
+  "Shield of the Pastalord",
+  -- +5 Familiar Weight
+  "Leash of Linguini",
+  -- +10% Spell Critical Chance. Facial expression.
+  "Wizard Squint",
   --]=]
+
   ---[=[ Sauceror
-  "Saucemastery",                           -- +1 Mysticality, +3 HP
-  "Icy Glare",                              -- +10 Cold Damage, +10 Damage with Cold spells. Facial expression.
-  "Elemental Saucesphere",                  -- So-So Resistance to all elements (+2)
-  "Jalapeño Saucesphere",                   -- 3 Damage Reduction, Lightly damages attacking Monsters
-  "Antibiotic Saucesphere",                 -- Regenerate 4-5 HP per Adventure
-  "Wry Smile",                              -- +1 Mysticality Substat per fight. Facial expression.
-  "Sauce Monocle",                          -- +15% Spell Critical Chance (+5% for non-Sauceror)
+  -- +1 Mysticality, +3 HP
+  "Saucemastery",
+  -- +10 Cold Damage, +10 Damage with Cold spells. Facial expression.
+  "Icy Glare",
+  -- So-So Resistance to all elements (+2)
+  "Elemental Saucesphere",
+  -- 3 Damage Reduction, Lightly damages attacking Monsters
+  "Jalapeño Saucesphere",
+  -- Regenerate 4-5 HP per Adventure
+  "Antibiotic Saucesphere",
+  -- +1 Mysticality Substat per fight. Facial expression.
+  "Wry Smile",
+  -- +15% Spell Critical Chance (+5% for non-Sauceror)
+  "Sauce Monocle",
   --]=]
+
   ---[=[ Disco Bandit
-  "Disco State of Mind",                    -- +2 Moxie
-  "Disco Smirk",                            -- +10 Moxie. Facial expression.
-  "Disco Fever",                            -- +10% Moxie, +10 Ranged Damage
-  "Smooth Movements",                       -- Decreases combat frequency.
-  "Disco Leer",                             -- +10% Meat from Monsters. Facial expression.
+  -- +2 Moxie
+  "Disco State of Mind",
+  -- +10 Moxie. Facial expression.
+  "Disco Smirk",
+  -- +10% Moxie, +10 Ranged Damage
+  "Disco Fever",
+  -- Decreases combat frequency.
+  "Smooth Movements",
+  -- +10% Meat from Monsters. Facial expression.
+  "Disco Leer",
   --]=]
+
   ---[=[ Accordion Thief
-  "Mariachi Mood",                          -- +1 Moxie, +3 HP
-  "The Moxious Madrigal",                   -- +10 Moxie. Song.
-  "Magical Mojomuscular Melody",            -- +10 Mysticality, +20 MP. Song.
-  "Cletus's Canticle of Celerity",          -- +20% Combat Initiative. Song.
-  "Power Ballad of the Arrowsmith",         -- +10 Muscle, +20 HP. Song.
-  "Polka of Plenty",                        -- +50% Meat from Monsters. Song.
-  "Jackasses' Symphony of Destruction",     -- +12 Weapon and Spell Damage. Song.
-  "Fat Leon's Phat Loot Lyric",             -- +20% Items from Monsters. Song.
-  "Brawnee's Anthem of Absorption",         -- floor(level^1.2) Damage Reduction. Song.
-  "Suspicious Gaze",                        -- +20% Combat Initiative. Facial expression.
-  "Psalm of Pointiness",                    -- Delevels and Damages attacking Monsters. Song.
-  "Stevedave's Shanty of Superiority",      -- +10% to All Attributes. Song.
-  "Aloysius' Antiphon of Aptitude",         -- +1 of each Substat per fight. Song.
-  "The Sonata of Sneakiness",               -- Decreases combat frequency. Song.
-  "Carlweather's Cantata of Confrontation", -- Increases combat frequency. Song.
-  "Knowing Smile",                          -- +1 Moxie Substat per fight. Facial expression.
-  "Ur-Kel's Aria of Annoyance",             -- +2*level ML. Song.
-  "Dirge of Dreadfulness",                  -- +12 Spooky Damage, +12 Damage with Spooky spells. Song.
-  "Cringle's Curative Carol",               -- Regenerate 5-10 HP per Adventure. Crimbo '09 skill. Song.
+  -- +1 Moxie, +3 HP
+  "Mariachi Mood",
+  -- +10 Moxie. Song.
+  "The Moxious Madrigal",
+  -- +10 Mysticality, +20 MP. Song.
+  "Magical Mojomuscular Melody",
+  -- +20% Combat Initiative. Song.
+  "Cletus's Canticle of Celerity",
+  -- +10 Muscle, +20 HP. Song.
+  "Power Ballad of the Arrowsmith",
+  -- +50% Meat from Monsters. Song.
+  "Polka of Plenty",
+  -- +12 Weapon and Spell Damage. Song.
+  "Jackasses' Symphony of Destruction",
+  -- +20% Items from Monsters. Song.
+  "Fat Leon's Phat Loot Lyric",
+  -- floor(level^1.2) Damage Reduction. Song.
+  "Brawnee's Anthem of Absorption",
+  -- +20% Combat Initiative. Facial expression.
+  "Suspicious Gaze",
+  -- Delevels and Damages attacking Monsters. Song.
+  "Psalm of Pointiness",
+  -- +10% to All Attributes. Song.
+  "Stevedave's Shanty of Superiority",
+  -- +1 of each Substat per fight. Song.
+  "Aloysius' Antiphon of Aptitude",
+  -- Decreases combat frequency. Song.
+  "The Sonata of Sneakiness",
+  -- Increases combat frequency. Song.
+  "Carlweather's Cantata of Confrontation",
+  -- +1 Moxie Substat per fight. Facial expression.
+  "Knowing Smile",
+  -- +2*level ML. Song.
+  "Ur-Kel's Aria of Annoyance",
+  -- +12 Spooky Damage, +12 Damage with Spooky spells. Song.
+  "Dirge of Dreadfulness",
+  -- Regenerate 5-10 HP per Adventure. Crimbo '09 skill. Song.
+  "Cringle's Curative Carol",
   --]=]
   --]===]
   -- Challenge path specific classes coming eventually, probably.
