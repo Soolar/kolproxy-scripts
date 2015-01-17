@@ -7,7 +7,6 @@
 -- by shrugging it off.                                         --
 ------------------------------------------------------------------
 
-
 -- If you have less than this percentage of your max mp left, no more buffs will be autocast
 local mppercentcutoff = 1 - 0.11
 -- Won't bother extending buffs to last longer than this

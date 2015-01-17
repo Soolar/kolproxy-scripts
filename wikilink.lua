@@ -1,3 +1,11 @@
+------------------------------------------------------------------
+-- This script will add some convenient links to the official   --
+-- KoL wiki. Description popup windows will have the name of    --
+-- whatever is being described link to the wiki (while also     --
+-- closing the popup window), and monster and adventure names   --
+-- will also link to the wiki.                                  --
+------------------------------------------------------------------
+
 local function printer_replace(pattern, substituter)
   return function()
     text = text:gsub(pattern, substituter)
