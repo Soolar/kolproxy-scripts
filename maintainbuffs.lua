@@ -8,7 +8,7 @@
 ------------------------------------------------------------------
 
 -- If you have less than this percentage of your max mp left, no more buffs will be autocast
-local mppercentcutoff = 1 - 0.11
+local mppercentcutoff = 0.75
 -- Won't bother extending buffs to last longer than this
 local maxturns = 1011
 -- Will only attempt to buff this many times per page, just in case an infinite loop happens somehow, and to generally reduce lag.
@@ -167,21 +167,25 @@ local buffs = {
 
 local function buffmaintenanceautomator()
   --print("BUFF MAINTENANCE")
-  local currloops = 0
-  while mp() / maxmp() > mppercentcutoff do
-    currloops = currloops + 1
-    if currloops > maxloops then
-      break
+
+  -- Trim out the buffs that aren't going to actually be maintained,
+  -- to avoid looping over all of them pointlessly.
+  local buffs_to_maintain = {}
+  for i,v in ipairs(buffs) do
+    if buffturns(v.effectname) > 0 and have_skill(v.skillname) then
+      buffs_to_maintain[#buffs_to_maintain + 1] = v
     end
+  end
+
+  local minmp = maxmp() * mppercentcutoff
+  for loop = 1, maxloops do
     local leastturnsleft = maxturns
     local bufftocast
-    for i,v in ipairs(buffs) do
-      if have_skill(v.skillname) then
-        local turnsleft = buffturns(v.effectname)
-        if turnsleft > 0 and turnsleft < leastturnsleft then
-          leastturnsleft = turnsleft
-          bufftocast = skillname
-        end
+    for i,v in ipairs(buffs_to_maintain) do
+      local turnsleft = buffturns(v.effectname)
+      if turnsleft < leastturnsleft and mp() - v.mpcost >= minmp then
+        leastturnsleft = turnsleft
+        bufftocast = v.skillname
       end
     end
     if bufftocast then
