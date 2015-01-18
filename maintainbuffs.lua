@@ -100,7 +100,7 @@ local buffs = {
   -- So-So Resistance to all elements (+2)
   buff("Elemental Saucesphere", 10),
   -- 3 Damage Reduction, Lightly damages attacking Monsters
-  buff("Jalapeño Saucesphere", 5),
+  buff("Jalape&ntilde;o Saucesphere", 5),
   -- Regenerate 4-5 HP per Adventure
   buff("Antibiotic Saucesphere", 15),
   -- +1 Mysticality Substat per fight. Facial expression.
