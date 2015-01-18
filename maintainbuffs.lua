@@ -183,9 +183,13 @@ local function buffmaintenanceautomator()
     local bufftocast
     for i,v in ipairs(buffs_to_maintain) do
       local turnsleft = buffturns(v.effectname)
-      if turnsleft < leastturnsleft and mp() - v.mpcost >= minmp then
+      if turnsleft < leastturnsleft then
         leastturnsleft = turnsleft
-        bufftocast = v.skillname
+        if mp() - v.mpcost >= minmp then
+          bufftocast = v.skillname
+        else
+          bufftocast = nil
+        end
       end
     end
     if bufftocast then
