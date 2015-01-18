@@ -168,16 +168,17 @@ local buffs = {
 local function buffmaintenanceautomator()
   --print("BUFF MAINTENANCE")
 
+  local minmp = maxmp() * mppercentcutoff
+
   -- Trim out the buffs that aren't going to actually be maintained,
   -- to avoid looping over all of them pointlessly.
   local buffs_to_maintain = {}
   for i,v in ipairs(buffs) do
-    if buffturns(v.effectname) > 0 and have_skill(v.skillname) then
+    if buffturns(v.effectname) > 0 and have_skill(v.skillname) and maxmp() - v.mpcost >= minmp then
       buffs_to_maintain[#buffs_to_maintain + 1] = v
     end
   end
 
-  local minmp = maxmp() * mppercentcutoff
   for loop = 1, maxloops do
     local leastturnsleft = maxturns
     local bufftocast
