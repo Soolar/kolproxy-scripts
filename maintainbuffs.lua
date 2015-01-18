@@ -85,6 +85,7 @@ local buffs = {
   buff("Springy Fusilli", 10),
   -- 30% Reduced physical damage taken (10% for non-Pastamancers)
   buff("Shield of the Pastalord", 20),
+  buff("Flimsy Shield of the Pastalord", 20, "Shield of the Pastalord"),
   -- +5 Familiar Weight
   buff("Leash of Linguini", 12),
   -- +10% Spell Critical Chance. Facial expression.
