@@ -197,14 +197,19 @@ local function buffmaintenanceautomator()
       if turnsleft < leastturnsleft then
         leastturnsleft = turnsleft
         if mp() - v.mpcost >= minmp then
-          bufftocast = v.skillname
+          bufftocast = v
         else
           bufftocast = nil
         end
       end
     end
     if bufftocast then
-      cast_skill(bufftocast)
+      cast_skill(bufftocast.skillname)
+      if buffturns(bufftocast.effectname) == leastturnsleft then
+        -- Something went wrong with casting the buff.
+        -- Odds are it's going to keep happening, so just give up for this time.
+        break
+      end
     else
       break
     end
