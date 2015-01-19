@@ -208,3 +208,4 @@ end
 add_automator("won fight", buffmaintenanceautomator)
 add_automator("use item", buffmaintenanceautomator)
 add_automator("/choice.php", buffmaintenanceautomator)
+add_automator("/adventure.php", buffmaintenanceautomator)
