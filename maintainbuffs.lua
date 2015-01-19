@@ -173,6 +173,13 @@ local function buffmaintenanceautomator()
 
   local minmp = maxmp() * mppercentcutoff
 
+  -- Don't even bother sorting through which buffs should be
+  -- maintained and such unless you have enough mana to cast
+  -- some of them in the first place.
+  if mp() <= minmp then
+    return
+  end
+
   -- Trim out the buffs that aren't going to actually be maintained,
   -- to avoid looping over all of them pointlessly.
   local buffs_to_maintain = {}
