@@ -107,6 +107,8 @@ local buffs = {
   buff("Wry Smile", 10),
   -- +15% Spell Critical Chance (+5% for non-Sauceror)
   buff("Sauce Monocle", 20),
+  -- So-So Cold and Sleaze Resistance (+2), Deals light Spooky damage to attackers.
+  buff("Scarysauce", 10),
   --]=]
 
   ---[=[ Disco Bandit
