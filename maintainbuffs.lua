@@ -232,7 +232,7 @@ local function buffmaintenanceautomator()
   -- non-combat skills at the moment.
   -- Also, if your mp hasn't changed since last time this finished,
   -- odds are you aren't going to be able to cast anything.
-  if locked() or mp() == previousmp or mp() <= minmp then
+  if locked() or (mp() == previousmp and not mp() == maxmp()) or mp() <= minmp then
     return
   end
 
