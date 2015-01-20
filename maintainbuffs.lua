@@ -17,18 +17,49 @@ local maxturns = 1011
 --       UNLESS THEY INTEND TO MODIFY CORE FUNCTIONALITY        --
 ------------------------------------------------------------------
 
+local buffmeta = {}
+buffmeta.__index = buffmeta
+
+function buffmeta:ShouldBeMaintained()
+  -- Only auto-extend active buffs
+  if buffturns(self.effectname) < 1 then
+    return false
+  end
+
+  -- Can't extend a buff if you don't know the skill to cast it
+  if not have_skill(self.skillname) then
+    return false
+  end
+
+  -- No point trying to maintain a buff automatically if the
+  -- mana allowance for maintenance is too small to cast it
+  if maxmp() - self.mpcost < maxmp() * mppercentcutoff then
+    return false
+  end
+
+  -- If this buff has some extra conditions for whether or not
+  -- it should be maintained, check them too
+  if self.condition and not self.condition() then
+    return false
+  end
+
+  return true
+end
+
 local function buff(effectname, mpcost, skillname, condition)
   skillname = skillname or effectname
-  return {
+  local thisbuff = {
     effectname = effectname,
     mpcost = mpcost,
     skillname = skillname,
     condition = condition,
   }
+  setmetatable(thisbuff, buffmeta)
+  return thisbuff
 end
 
 local function haveaccordion()
-  return AT_song_duration > 0
+  return AT_song_duration() > 0
 end
 
 local buffs = {
@@ -196,11 +227,8 @@ local function buffmaintenanceautomator()
   -- to avoid looping over all of them pointlessly.
   local buffs_to_maintain = {}
   for i,v in ipairs(buffs) do
-    if buffturns(v.effectname) > 0 and have_skill(v.skillname) and maxmp() - v.mpcost >= minmp then
-      -- If the skill has a condition for it to be auto-maintained, then check it first.
-      if not v.condition or v.condition() then
-        buffs_to_maintain[#buffs_to_maintain + 1] = v
-      end
+    if v:ShouldBeMaintained() then
+      buffs_to_maintain[#buffs_to_maintain + 1] = v
     end
   end
 
