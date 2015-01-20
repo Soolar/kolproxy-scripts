@@ -69,8 +69,10 @@ local function havetotem()
 end
 
 local function havesaucepan()
-  -- TODO: Actually implement
-  return true
+  return have_item("Saucepan") or have_item("5-Alarm Saucepan") or
+         have_item("warbear oil pan") or have_item("oil pan") or
+         have_item("17-alarm Saucepan") or have_item("Saucepanic") or
+         have_item("Windsor Pan of the Source") or have_item("frying brainpan")
 end
 
 local buffs = {
