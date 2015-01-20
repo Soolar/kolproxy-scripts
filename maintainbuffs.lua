@@ -175,8 +175,9 @@ local function buffmaintenanceautomator()
 
   -- Don't even bother sorting through which buffs should be
   -- maintained and such unless you have enough mana to cast
-  -- some of them in the first place.
-  if mp() <= minmp then
+  -- some of them in the first place, and you are able to cast
+  -- non-combat skills at the moment.
+  if locked() or mp() <= minmp then
     return
   end
 
@@ -216,8 +217,4 @@ local function buffmaintenanceautomator()
   end
 end
 
---add_automator("all pages", buffmaintenanceautomator)
-add_automator("won fight", buffmaintenanceautomator)
-add_automator("use item", buffmaintenanceautomator)
-add_automator("/choice.php", buffmaintenanceautomator)
-add_automator("/adventure.php", buffmaintenanceautomator)
+add_automator("all pages", buffmaintenanceautomator)
