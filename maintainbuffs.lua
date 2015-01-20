@@ -11,8 +11,6 @@
 local mppercentcutoff = 0.75
 -- Won't bother extending buffs to last longer than this
 local maxturns = 1011
--- Will only attempt to buff this many times per page, just in case an infinite loop happens somehow, and to generally reduce lag.
-local maxloops = 11
 
 ------------------------------------------------------------------
 -- END OF CONFIGURATION, END USER SHOULD NOT MODIFY BEYOND HERE --
@@ -168,6 +166,8 @@ local buffs = {
   -- Challenge path specific classes coming eventually, probably.
 }
 
+local previousmp = -1
+
 local function buffmaintenanceautomator()
   --print("BUFF MAINTENANCE")
 
@@ -177,7 +177,9 @@ local function buffmaintenanceautomator()
   -- maintained and such unless you have enough mana to cast
   -- some of them in the first place, and you are able to cast
   -- non-combat skills at the moment.
-  if locked() or mp() <= minmp then
+  -- Also, if your mp hasn't changed since last time this finished,
+  -- odds are you aren't going to be able to cast anything.
+  if locked() or mp() == previousmp or mp() <= minmp then
     return
   end
 
@@ -190,7 +192,7 @@ local function buffmaintenanceautomator()
     end
   end
 
-  for loop = 1, maxloops do
+  while true do
     local leastturnsleft = maxturns
     local bufftocast
     for i,v in ipairs(buffs_to_maintain) do
@@ -209,12 +211,15 @@ local function buffmaintenanceautomator()
       if buffturns(bufftocast.effectname) == leastturnsleft then
         -- Something went wrong with casting the buff.
         -- Odds are it's going to keep happening, so just give up for this time.
+        print("Something odd went wrong with buff maintenance!")
         break
       end
     else
       break
     end
   end
+
+  previousmp = mp()
 end
 
 add_automator("all pages", buffmaintenanceautomator)
