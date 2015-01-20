@@ -117,11 +117,11 @@ local buffs = {
   -- Your melee attacks restore some MP
   buff("Boon of the Storm Tortoise", 30, "Spirit Boon"),
   -- +1 Muscle Substat per fight. Facial expression.
-  buff("Patient Smile", 10),
+  buff("Patient Smile", 10, nil, havetotem),
   -- Familiar will act more often in combat. Crimbo '09 skill.
-  buff("Jingle Jangle Jingle", 5),
+  buff("Jingle Jangle Jingle", 5, nil, havetotem),
   -- +1 Familiar Experience per combat. Travelling Trader skill.
-  buff("Curiosity of Br'er Tarrypin", 10),
+  buff("Curiosity of Br'er Tarrypin", 10, nil, havetotem),
   --]=]
 
   ---[=[ Pastamancer
