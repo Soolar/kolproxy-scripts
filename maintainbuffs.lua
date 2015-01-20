@@ -27,6 +27,10 @@ local function buff(effectname, mpcost, skillname, condition)
   }
 end
 
+local function haveaccordion()
+  return AT_song_duration > 0
+end
+
 local buffs = {
   ---[===[ STANDARD CLASSES
   ---[=[ Seal Clubber
@@ -131,41 +135,41 @@ local buffs = {
   -- +1 Moxie, +3 HP
   buff("Mariachi Mood", 1, "Moxie of the Mariachi"),
   -- +10 Moxie. Song.
-  buff("The Moxious Madrigal", 2),
+  buff("The Moxious Madrigal", 2, nil, haveaccordion),
   -- +10 Mysticality, +20 MP. Song.
-  buff("Magical Mojomuscular Melody", 3, "The Magical Mojomuscular Melody"),
+  buff("Magical Mojomuscular Melody", 3, "The Magical Mojomuscular Melody", haveaccordion),
   -- +20% Combat Initiative. Song.
-  buff("Cletus's Canticle of Celerity", 4),
+  buff("Cletus's Canticle of Celerity", 4, nil, haveaccordion),
   -- +10 Muscle, +20 HP. Song.
-  buff("Power Ballad of the Arrowsmith", 5, "The Power Ballad of the Arrowsmith"),
+  buff("Power Ballad of the Arrowsmith", 5, "The Power Ballad of the Arrowsmith", haveaccordion),
   -- +50% Meat from Monsters. Song.
-  buff("Polka of Plenty", 7, "The Polka of Plenty"),
+  buff("Polka of Plenty", 7, "The Polka of Plenty", haveaccordion),
   -- +12 Weapon and Spell Damage. Song.
-  buff("Jackasses' Symphony of Destruction", 9),
+  buff("Jackasses' Symphony of Destruction", 9, nil, haveaccordion),
   -- +20% Items from Monsters. Song.
-  buff("Fat Leon's Phat Loot Lyric", 11),
+  buff("Fat Leon's Phat Loot Lyric", 11, nil, haveaccordion),
   -- floor(level^1.2) Damage Reduction. Song.
-  buff("Brawnee's Anthem of Absorption", 13),
+  buff("Brawnee's Anthem of Absorption", 13, nil, haveaccordion),
   -- +20% Combat Initiative. Facial expression.
   buff("Suspicious Gaze", 10),
   -- Delevels and Damages attacking Monsters. Song.
-  buff("Psalm of Pointiness", 15, "The Psalm of Pointiness"),
+  buff("Psalm of Pointiness", 15, "The Psalm of Pointiness", haveaccordion),
   -- +10% to All Attributes. Song.
-  buff("Stevedave's Shanty of Superiority", 30),
+  buff("Stevedave's Shanty of Superiority", 30, nil, haveaccordion),
   -- +1 of each Substat per fight. Song.
-  buff("Aloysius' Antiphon of Aptitude", 40),
+  buff("Aloysius' Antiphon of Aptitude", 40, nil, haveaccordion),
   -- Decreases combat frequency. Song.
-  buff("The Sonata of Sneakiness", 20),
+  buff("The Sonata of Sneakiness", 20, nil, haveaccordion),
   -- Increases combat frequency. Song.
-  buff("Carlweather's Cantata of Confrontation", 20),
+  buff("Carlweather's Cantata of Confrontation", 20, nil, haveaccordion),
   -- +1 Moxie Substat per fight. Facial expression.
   buff("Knowing Smile", 10),
   -- +2*level ML. Song.
-  buff("Ur-Kel's Aria of Annoyance", 30),
+  buff("Ur-Kel's Aria of Annoyance", 30, nil, haveaccordion),
   -- +12 Spooky Damage, +12 Damage with Spooky spells. Song.
-  buff("Dirge of Dreadfulness", 9),
+  buff("Dirge of Dreadfulness", 9, nil, haveaccordion),
   -- Regenerate 5-10 HP per Adventure. Crimbo '09 skill. Song.
-  buff("Cringle's Curative Carol", 5),
+  buff("Cringle's Curative Carol", 5, nil, haveaccordion),
   --]=]
   --]===]
   -- Challenge path specific classes coming eventually, probably.
