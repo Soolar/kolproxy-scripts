@@ -63,8 +63,9 @@ local function haveaccordion()
 end
 
 local function havetotem()
-  -- TODO: Actually implement
-  return true
+  return have_item("turtle totem") or have_item("Ouija Board, Ouija Board") or
+         have_item("Mace of the Tortoise") or have_item("Chelonian Morningstar") or
+         have_item("Flail of the Seven Aspects")
 end
 
 local function havesaucepan()
