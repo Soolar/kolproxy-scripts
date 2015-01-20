@@ -62,6 +62,16 @@ local function haveaccordion()
   return AT_song_duration() > 0
 end
 
+local function havetotem()
+  -- TODO: Actually implement
+  return true
+end
+
+local function havesaucepan()
+  -- TODO: Actually implement
+  return true
+end
+
 local buffs = {
   ---[===[ STANDARD CLASSES
   ---[=[ Seal Clubber
@@ -89,17 +99,17 @@ local buffs = {
   -- 10 Damage Reduction. Facial expression.
   buff("Stiff Upper Lip", 10),
   -- +80 Damage Absorption
-  buff("Ghostly Shell", 6),
+  buff("Ghostly Shell", 6, nil, havetotem),
   -- +8 Weapon Damage
-  buff("Tenacity of the Snapper", 8),
+  buff("Tenacity of the Snapper", 8, nil, havetotem),
   -- +5 Familiar Weight
-  buff("Empathy", 15, "Empathy of the Newt"),
+  buff("Empathy", 15, "Empathy of the Newt", nil, havetotem),
   -- Damages attacking Monsters
-  buff("Spiky Shell", 8),
+  buff("Spiky Shell", 8, nil, havetotem),
   -- +30 HP
-  buff("Reptilian Fortitude", 10),
+  buff("Reptilian Fortitude", 10, nil, havetotem),
   -- +80 Damage Absorption, Slight resistance to all elements (+1)
-  buff("Astral Shell", 10),
+  buff("Astral Shell", 10, nil, havetotem),
   -- Your melee attacks restore some HP
   buff("Boon of the War Snapper", 30, "Spirit Boon"),
   -- +20 Weapon Damage, Your melee attacks deal Spooky Damage
@@ -136,17 +146,17 @@ local buffs = {
   -- +10 Cold Damage, +10 Damage with Cold spells. Facial expression.
   buff("Icy Glare", 10),
   -- So-So Resistance to all elements (+2)
-  buff("Elemental Saucesphere", 10),
+  buff("Elemental Saucesphere", 10, nil, havesaucepan),
   -- 3 Damage Reduction, Lightly damages attacking Monsters
-  buff("Jalape&ntilde;o Saucesphere", 5),
+  buff("Jalape&ntilde;o Saucesphere", 5, nil, havesaucepan),
   -- Regenerate 4-5 HP per Adventure
-  buff("Antibiotic Saucesphere", 15),
+  buff("Antibiotic Saucesphere", 15, nil, havesaucepan),
   -- +1 Mysticality Substat per fight. Facial expression.
   buff("Wry Smile", 10),
   -- +15% Spell Critical Chance (+5% for non-Sauceror)
   buff("Sauce Monocle", 20),
   -- So-So Cold and Sleaze Resistance (+2), Deals light Spooky damage to attackers.
-  buff("Scarysauce", 10),
+  buff("Scarysauce", 10, nil, havesaucepan),
   --]=]
 
   ---[=[ Disco Bandit
