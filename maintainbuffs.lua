@@ -21,8 +21,15 @@ local buffmeta = {}
 buffmeta.__index = buffmeta
 
 function buffmeta:ShouldBeMaintained()
+  local turnsleft = buffturns(self.effectname)
+
   -- Only auto-extend active buffs
-  if buffturns(self.effectname) < 1 then
+  if turnsleft < 1 then
+    return false
+  end
+
+  -- Don't maintain buffs over the max turn limit
+  if turnsleft >= maxturns then
     return false
   end
 
