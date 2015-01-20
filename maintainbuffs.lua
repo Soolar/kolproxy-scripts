@@ -17,9 +17,14 @@ local maxturns = 1011
 --       UNLESS THEY INTEND TO MODIFY CORE FUNCTIONALITY        --
 ------------------------------------------------------------------
 
-local function buff(effectname, mpcost, skillname)
+local function buff(effectname, mpcost, skillname, condition)
   skillname = skillname or effectname
-  return { effectname = effectname, mpcost = mpcost, skillname = skillname }
+  return {
+    effectname = effectname,
+    mpcost = mpcost,
+    skillname = skillname,
+    condition = condition,
+  }
 end
 
 local buffs = {
@@ -33,8 +38,8 @@ local buffs = {
   buff("Scowl of the Auk", 10),
   -- +10% Muscle, +10 Weapon Damage
   buff("Rage of the Reindeer", 10),
-  -- Increases combat frequency.
-  buff("Musk of the Moose", 10),
+  -- Increases combat frequency. Will not auto-maintain unless you know Smooth Movement, since it can't be shrugged.
+  buff("Musk of the Moose", 10, nil, function() return have_skill("Smooth Movement") end),
   -- +10 Monster Level
   buff("Pride of the Puffin", 30),
   -- +10 Spooky Damage. Facial expression.
@@ -116,8 +121,8 @@ local buffs = {
   buff("Disco Smirk", 10),
   -- +10% Moxie, +10 Ranged Damage
   buff("Disco Fever", 10),
-  -- Decreases combat frequency.
-  buff("Smooth Movements", 10, "Smooth Movement"),
+  -- Decreases combat frequency. Will not auto-maintain unless you know Musk of the Moose, since it can't be shrugged.
+  buff("Smooth Movements", 10, "Smooth Movement", function() return have_skill("Musk of the Moose") end),
   -- +10% Meat from Monsters. Facial expression.
   buff("Disco Leer", 10),
   --]=]
@@ -188,7 +193,10 @@ local function buffmaintenanceautomator()
   local buffs_to_maintain = {}
   for i,v in ipairs(buffs) do
     if buffturns(v.effectname) > 0 and have_skill(v.skillname) and maxmp() - v.mpcost >= minmp then
-      buffs_to_maintain[#buffs_to_maintain + 1] = v
+      -- If the skill has a condition for it to be auto-maintained, then check it first.
+      if not v.condition or v.condition() then
+        buffs_to_maintain[#buffs_to_maintain + 1] = v
+      end
     end
   end
 
