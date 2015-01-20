@@ -245,6 +245,10 @@ local function buffmaintenanceautomator()
     end
   end
 
+  if #buffs_to_maintain == 0 then
+    return
+  end
+
   while true do
     local leastturnsleft = maxturns
     local bufftocast
